@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>创建Person对象并画原型链图</title>
+</head>
+<body>
+<script type="text/javascript">
+    //创建父类Person 构造方法
+    function Person(nation, skinColor) {
+        this.nation = nation;
+        this.skinColor = skinColor;
+    }
+    //父类方法
+    Person.prototype.showNation = function () {
+        str = "民族：" + this.nation;
+        return str;
+    }
+    Person.prototype.showSkinColor = function () {
+        str = "肤色：" + this.skinColor;
+        return str;
+    }
+
+    //创建子类Woman 构造方法
+    function Woman(nation, skinColor, sex) {
+        Person.call(this, nation, skinColor);//继承父类的属性
+        this.sex = sex;
+    }
+
+    //继承父类的方法
+    Woman.prototype = new Person();
+
+    //创建子类Women 方法
+    Woman.prototype.showSex = function () {
+        return str = "性别：" + this.sex;
+    }
+    var woman = new Woman("汉族", "黄色", "女");//因为继承了父类，可以设置父类的属性
+    //调用父类的方法
+    var str1 = woman.showNation();
+    var str2 = woman.showSkinColor();
+    //调用自身方法
+    var str3 = woman.showSex();
+    var str = str1 + "<br>" + str2 + "<br>" + str3;//拼接字符
+    document.getElementsByTagName("div")[0].innerHTML = str;//字符添加至div
+</script>
+
+</body>
+</html>

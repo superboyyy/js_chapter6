@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>创建Animal对象</title>
+</head>
+<body>
+<div id="intro"></div>
+<script type="text/javascript">
+    function Animal(name, age, voice) {
+        this.name = name;
+        this.age = age;
+        this.voice = voice;
+    }
+
+    Animal.prototype.attribute = function () {
+        var str = "我的姓名是： " + name + "<br/>我的年龄是： " + age + "<br/>我的叫声是： " + voice;
+        return str;
+    }
+
+    function Dog(name, age, voice, specialty) {
+        Animal.call(this, name, age, voice);
+        this.specialty = specialty;
+    }
+
+    Dog.prototype = new Animal();
+    Dog.prototype.attributedog = function () {
+        var str = this.specialty;
+        return str;
+    }
+
+    function Cat(name, age, voice, specialty) {
+        Animal.call(this, name, age, voice);
+        this.specialty = specialty;
+    }
+
+    Cat.prototype = new Animal();
+    Cat.prototype.attributecat = function () {
+        var str = this.specialty;
+        return str;
+    }
+
+    var dog = new Dog("哈士奇", 4, "嗷嗷", "我会拆家");
+    var cat = new Cat("加菲猫", 2, "喵喵", "我会翻跟头");
+    var str1 = dog.attribute();
+    var str3 = dog.attributedog();
+    var str2 = cat.attribute();
+    var str4 = cat.attributecat();
+    var str = str1 + "<br/>" + str2 + "<br/>" + str3 + "<br/>" + str4;
+    document.getElementsByTagName("div")[0].innerHTML = str;
+
+
+</script>
+</body>
+</html>
